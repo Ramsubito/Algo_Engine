@@ -1,0 +1,109 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+!Game/Source/External/SDL/libx86/SDL2.lib
+!Game/Source/External/SDL/libx86/SDL2main.lib
+!Game/Source/External/SDL_image/libx86/SDL2_image.lib
+!Game/Source/External/SDL_mixer/libx86/SDL2_mixer.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Ignore thumbnails created by windows
+Thumbs.db
+
+# Ignore files build by Visual Studio
+*.obj
+*.pdb
+*.aps
+# *.user
+# *.vcproj
+# *.vcxproj*
+# *.sln
+*.vspscc
+*_i.c
+*.i
+*.icf
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.tlog
+.vs
+
+[Bb]uild
+[Bb]in
+[Dd]ebug/
+*.sbr
+*.sdf
+obj/
+[R]elease/
+_ReSharper*/
+[Tt]est[Rr]esult*
+ipch/
+*.opensdf
+*.db
+*.opendb
+packages/
+*.obj
+*.tlog
+3D car/Debug/3D Physi.746CC4C3.tlog/CL.command.1.tlog
+3D car/Debug/3D Physi.746CC4C3.tlog/CL.read.1.tlog
+3D car/Debug/3D Physi.746CC4C3.tlog/CL.write.1.tlog
+3D car/Debug/3D Physi.746CC4C3.tlog/link.command.1.tlog
+3D car/Debug/3D Physi.746CC4C3.tlog/link.read.1.tlog
+3D car/Debug/3D Physi.746CC4C3.tlog/link.write.1.tlog
+3D car/Debug/3D Physics - class5.exe
+3D car/Debug/3D Physics - class5.ilk
+3D car/Debug/3D Physics - class5.pdb
+3D car/Debug/3D Physics.log
+3D car/Debug/Application.obj
+3D car/Debug/Color.obj
+3D car/Debug/glmath.obj
+3D car/Debug/Light.obj
+3D car/Debug/log.obj
+3D car/Debug/Main.obj
+3D car/Debug/ModuleAudio.obj
+3D car/Debug/ModuleCamera3D.obj
+3D car/Debug/ModuleInput.obj
+3D car/Debug/ModulePhysics3D.obj
+3D car/Debug/ModulePlayer.obj
+3D car/Debug/ModuleRenderer3D.obj
+3D car/Debug/ModuleSceneIntro.obj
+3D car/Debug/ModuleWindow.obj
+3D car/Debug/PhysBody3D.obj
+3D car/Debug/PhysVehicle3D.obj
+3D car/Debug/Primitive.obj
+3D car/Debug/Timer.obj
+3D car/Debug/vc142.idb
+3D car/Debug/vc142.pdb
