@@ -1,2 +1,10 @@
-﻿  ModuleSceneIntro.cpp
+﻿  Application.cpp
+  Main.cpp
+  ModuleAudio.cpp
+  ModuleCamera3D.cpp
+  ModuleInput.cpp
+  ModuleRenderer3D.cpp
+  ModuleSceneIntro.cpp
+  ModuleWindow.cpp
+  Generando código...
   3D Physics.vcxproj -> C:\Users\Tomas\Documents\GitHub\Algo_Engine\Algo_Engine\Debug\3D Physics - class2 Handout.exe

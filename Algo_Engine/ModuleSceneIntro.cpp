@@ -51,30 +51,33 @@ update_status ModuleSceneIntro::Update(float dt)
 	{
 		static float f = 0.0f;
 
-		ImGui::Begin("Close me to close the App!");                          // Create a window called "Hello, world!" and append into it.
+		ImGui::Begin("Do you want to close the engine?");                          // Create a window called "Hello, world!" and append into it.
 
+		ImGui::Checkbox("Debug Window", &show_debug_window);
 		if (ImGui::Button("Exit"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
 			return UPDATE_STOP;
-
 		ImGui::End();
 	}
+	if (show_debug_window)
 	{
 		static float f = 0.0f;
 
 		ImGui::Checkbox("Demo Window", &show_demo_window);
+		ImGui::Checkbox("Another Window", &show_another_window);
 		if (show_demo_window)
 			ImGui::ShowDemoWindow(&show_demo_window);
+		if (ImGui::Button("Close Debug Window"))
+			show_debug_window = false;
 			
 	}
-
-	//if (show_another_window)
-	//{
-	//    ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-	//    ImGui::Text("Hello from another window!");
-	//    if (ImGui::Button("Close Me"))
-	//        show_another_window = false;
-	//    ImGui::End();
-	//}
+	if (show_another_window)
+	{
+	    ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+	    ImGui::Text("Hello from another window!");
+	    if (ImGui::Button("Close Another Window"))
+	        show_another_window = false;
+	    ImGui::End();
+	}
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::Render();
 	glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
