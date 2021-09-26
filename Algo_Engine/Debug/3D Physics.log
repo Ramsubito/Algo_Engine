@@ -1,4 +1,4 @@
-﻿  Application.cpp
-  Primitive.cpp
-  Generando código...
+﻿  LINK : no se encontró C:\Users\Tomas\Documents\GitHub\Algo_Engine\Algo_Engine\Debug\3D Physics - class2 Handout.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+imgui_impl_sdl.obj : warning LNK4205: falta información de depuración actual de 'C:\Users\Tomas\Documents\GitHub\Algo_Engine\Algo_Engine\Debug\vc142.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
+imgui_impl_opengl3.obj : warning LNK4205: falta información de depuración actual de 'C:\Users\Tomas\Documents\GitHub\Algo_Engine\Algo_Engine\Debug\vc142.pdb' para hacer referencia al módulo; se vinculará el objeto sin tener en cuenta información de depuración
   3D Physics.vcxproj -> C:\Users\Tomas\Documents\GitHub\Algo_Engine\Algo_Engine\Debug\3D Physics - class2 Handout.exe
