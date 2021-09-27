@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "glmath.h"
 #include "Light.h"
-
+#include "Glew/include/glew.h"
 #define MAX_LIGHTS 8
 
 class ModuleRenderer3D : public Module
