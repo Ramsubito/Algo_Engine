@@ -59,9 +59,11 @@ update_status ModuleEditor::PostUpdate(float dt)
 
 	if (show_console)
 	{
+		ImGui::Begin("Console", &show_console);
 		ImGui::Checkbox("Configuration", &show_configuration);
 		if (ImGui::Button("Close console"))
 			show_console = false;
+		ImGui::End();
 
 	}
 	if (show_guidemo)
@@ -74,6 +76,15 @@ update_status ModuleEditor::PostUpdate(float dt)
 		ImGui::Text("Hello from configuration!");
 		if (ImGui::Button("Close configuration"))
 			show_configuration = false;
+		ImGui::End();
+	}
+	if (show_about)
+	{
+		ImGui::Begin("About Algo Engine", &show_about);
+		ImGui::Text("Version 0.1-alpha");
+		ImGui::Separator();
+		ImGui::Text("By Marc Pavon and Marc Ramos for study purposes.");
+		ImGui::Text("Algo Engine is licensed under the Public Domain, see LICENSE for more informaton.");
 		ImGui::End();
 	}
 
@@ -98,11 +109,20 @@ update_status ModuleEditor::PostUpdate(float dt)
 		{
 			if (ImGui::MenuItem("Gui Demo"))
 				show_guidemo = !show_guidemo;
+			if (ImGui::MenuItem("Documendation"))
+				ShellExecuteA(NULL, "open", "https://github.com/Ramsubito/Algo_Engine", NULL, NULL, SW_SHOWNORMAL);
+			if (ImGui::MenuItem("Download latest"))
+				ShellExecuteA(NULL, "open", "https://github.com/Ramsubito/Algo_Engine/releases", NULL, NULL, SW_SHOWNORMAL);
+			if (ImGui::MenuItem("Report a bug"))
+				ShellExecuteA(NULL, "open", "https://github.com/Ramsubito/Algo_Engine/issues", NULL, NULL, SW_SHOWNORMAL);
+			if (ImGui::MenuItem("About"))
+				show_about = !show_about;
 
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
 	}
+
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::Render();
 	glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
