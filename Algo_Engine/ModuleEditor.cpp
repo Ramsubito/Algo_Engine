@@ -85,6 +85,43 @@ update_status ModuleEditor::PostUpdate(float dt)
 		ImGui::Separator();
 		ImGui::Text("By Marc Pavon and Marc Ramos for study purposes.");
 		ImGui::Text("Algo Engine is licensed under the Public Domain, see LICENSE for more informaton.");
+		ImGui::Text(" ");
+		//LIBRARIES USED(To update versions)
+		ImGui::Text("3rd Party Libraries used:");
+		ImGui::BulletText("SDL 2.0.6");
+		ImGui::BulletText("SDL Mixer 2.0.0");
+		ImGui::BulletText("ImGui 1.51");
+		ImGui::BulletText("MathGeoLib 1.5");
+		ImGui::BulletText("OpenGL 3.1");
+		ImGui::BulletText("Glew 2.0.0");
+		//MIT LICENSE
+		ImGui::Text(" ");
+		ImGui::Text("License:");
+		ImGui::Text(" ");
+		ImGui::Text("MIT License");
+		ImGui::Text(" ");
+		ImGui::Text("Permission is hereby granted, free of charge, to any person obtaining a copy\n"
+			"of this software and associated documentation files (the 'Software'), to deal\n"
+			"in the Software without restriction, including without limitation the rights\n"
+			"to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n"
+			"copies of the Software, and to permit persons to whom the Software is\n"
+			"furnished to do so, subject to the following conditions:\n");
+		ImGui::Text(" ");
+		ImGui::Text("The above copyright notice and this permission notice shall be included in all\n"
+			"copies or substantial portions of the Software.\n");
+		ImGui::Text(" ");
+		ImGui::Text("THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n"
+			"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n"
+			"FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n"
+			"AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n"
+			"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n"
+			"OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n"
+			"SOFTWARE.");
+
+
+		;
+
+
 		ImGui::End();
 	}
 
