@@ -73,9 +73,27 @@ update_status ModuleEditor::PostUpdate(float dt)
 	if (show_configuration)
 	{
 		ImGui::Begin("Configuration", &show_configuration);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		ImGui::Text("Hello from configuration!");
-		if (ImGui::Button("Close configuration"))
-			show_configuration = false;
+		ImGui::Text("Options");
+		if (ImGui::CollapsingHeader("Application"))
+		{
+			ImGui::Text("app");
+		}
+		if (ImGui::CollapsingHeader("Window"))
+		{
+			ImGui::Text("w");
+		}
+		if (ImGui::CollapsingHeader("File System"))
+		{
+			ImGui::Text("f");
+		}
+		if (ImGui::CollapsingHeader("Input"))
+		{
+			ImGui::Text("i");
+		}
+		if (ImGui::CollapsingHeader("Hardware"))
+		{
+			ImGui::Text("h");
+		}
 		ImGui::End();
 	}
 	if (show_about)
@@ -83,9 +101,9 @@ update_status ModuleEditor::PostUpdate(float dt)
 		ImGui::Begin("About Algo Engine", &show_about);
 		ImGui::Text("Version 0.1-alpha");
 		ImGui::Separator();
-		ImGui::Text("By Marc Pavon and Marc Ramos for study purposes.");
-		ImGui::Text("Algo Engine is licensed under the Public Domain, see LICENSE for more informaton.");
-		ImGui::Text(" ");
+		ImGui::Text("By Marc Pavon and Marc Ramos for study purposes.\n" 
+			"Algo Engine is licensed under the Public Domain, see LICENSE for more informaton.");
+		ImGui::NewLine();
 		//LIBRARIES USED(To update versions)
 		ImGui::Text("3rd Party Libraries used:");
 		ImGui::BulletText("SDL 2.0.6");
@@ -95,21 +113,21 @@ update_status ModuleEditor::PostUpdate(float dt)
 		ImGui::BulletText("OpenGL 3.1");
 		ImGui::BulletText("Glew 2.0.0");
 		//MIT LICENSE
-		ImGui::Text(" ");
+		ImGui::NewLine();
 		ImGui::Text("License:");
-		ImGui::Text(" ");
+		ImGui::NewLine();
 		ImGui::Text("MIT License");
-		ImGui::Text(" ");
+		ImGui::NewLine();
 		ImGui::Text("Permission is hereby granted, free of charge, to any person obtaining a copy\n"
 			"of this software and associated documentation files (the 'Software'), to deal\n"
 			"in the Software without restriction, including without limitation the rights\n"
 			"to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n"
 			"copies of the Software, and to permit persons to whom the Software is\n"
 			"furnished to do so, subject to the following conditions:\n");
-		ImGui::Text(" ");
+		ImGui::NewLine();
 		ImGui::Text("The above copyright notice and this permission notice shall be included in all\n"
 			"copies or substantial portions of the Software.\n");
-		ImGui::Text(" ");
+		ImGui::NewLine();
 		ImGui::Text("THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n"
 			"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n"
 			"FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n"
