@@ -45,7 +45,9 @@ update_status ModuleEditor::Update(float dt)
 	{
 		show_configuration = !show_configuration;
 	}
+	SDL_SetWindowBrightness(App->window->window, f_brightness);
 
+	if (resiseable) SDL_SetWindowSize(App->window->window, i_width, i_height);
 	return UPDATE_CONTINUE;
 }
 
@@ -95,11 +97,9 @@ update_status ModuleEditor::PostUpdate(float dt)
 
 
 				// TODO: Que al cambiar el slider se cambie el brillo widht y height del engine
-				static float f_brightness = 1.0f;
 				ImGui::SliderFloat("Brightness", &f_brightness, 0.0f, 1.0f, "%.3f");
-				static int i_widht = 1280;
-				ImGui::SliderInt("Widht", &i_widht, 1, 3840, "%.d");
-				static int i_height = 1024;
+				SDL_SetWindowBrightness(App->window->window, f_brightness);
+				ImGui::SliderInt("Width", &i_width, 1, 3840, "%.d");
 				ImGui::SliderInt("Height", &i_height, 1, 2160, "%.d");
 
 				//ImGui::Text("Refresh rate: 60"); //TODO: preguntar al profe que es el refresh rate
@@ -107,7 +107,7 @@ update_status ModuleEditor::PostUpdate(float dt)
 				if (ImGui::Checkbox("Fullscreen", &fullscreen))
 				{
 					App->window->SetFullscreen(fullscreen);
-					if (full_desktop) full_desktop = false;
+					if (full_desktop || resiseable) full_desktop = false, resiseable = false;
 				}
 				ImGui::SameLine();
 				if (ImGui::Checkbox("Resiseable", &resiseable))
@@ -122,7 +122,7 @@ update_status ModuleEditor::PostUpdate(float dt)
 				if (ImGui::Checkbox("Full Desktop", &full_desktop))
 				{
 					App->window->SetFullDesktop(full_desktop);
-					if (fullscreen) fullscreen = false;
+					if (fullscreen || resiseable) fullscreen = false, resiseable = false;;
 				}
 			}
 		}

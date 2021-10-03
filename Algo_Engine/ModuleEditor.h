@@ -22,6 +22,9 @@ public:
 	bool resiseable = false;
 	bool borderless = false;
 	bool full_desktop = false;
+	float f_brightness = 1.0f;
+	int i_width = 1280;
+	int i_height = 1024;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 	bool Start();

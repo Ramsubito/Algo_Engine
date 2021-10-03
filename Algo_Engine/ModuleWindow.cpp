@@ -101,7 +101,8 @@ void ModuleWindow::SetFullscreen(bool fullscreen)
 
 void ModuleWindow::SetResiseable(bool resiseable)
 {
-	SDL_SetWindowFullscreen(window, SDL_WINDOW_RESIZABLE);
+	if (SDL_SetWindowFullscreen(window, SDL_WINDOW_RESIZABLE));
+	else SDL_SetWindowFullscreen(window, 0);
 }
 
 void ModuleWindow::SetBorderless(bool borderless)
