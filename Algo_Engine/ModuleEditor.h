@@ -17,6 +17,11 @@ public:
 	bool show_configuration = false;
 	bool show_guidemo = false;
 	bool show_about = false;
+	bool window_is_active = true;
+	bool fullscreen = false;
+	bool resiseable = false;
+	bool borderless = false;
+	bool full_desktop = false;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 	bool Start();

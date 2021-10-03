@@ -73,14 +73,58 @@ update_status ModuleEditor::PostUpdate(float dt)
 	if (show_configuration)
 	{
 		ImGui::Begin("Configuration", &show_configuration);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		ImGui::Text("Options");
+		if (ImGui::BeginMenu("Options"))
+		{
+			if (ImGui::MenuItem("Set Defaults")) return UPDATE_STOP; //TODO: Que set defaults load y save cambien/guarden la configuracion
+			if (ImGui::MenuItem("Load")) return UPDATE_STOP;
+			if (ImGui::MenuItem("Save")) return UPDATE_STOP;
+			ImGui::EndMenu();
+		}
 		if (ImGui::CollapsingHeader("Application"))
 		{
 			ImGui::Text("app");
 		}
 		if (ImGui::CollapsingHeader("Window"))
 		{
-			ImGui::Text("w");
+			ImGui::Checkbox("Active", &window_is_active);
+			if (window_is_active)
+			{
+				// TODO: poder cambiar el icono de la app abriendo la carpeta de proyecto desde otra ventana
+				ImGui::Text("Icon: ");
+				//ImGui::SameLine();
+
+
+				// TODO: Que al cambiar el slider se cambie el brillo widht y height del engine
+				static float f_brightness = 1.0f;
+				ImGui::SliderFloat("Brightness", &f_brightness, 0.0f, 1.0f, "%.3f");
+				static int i_widht = 1280;
+				ImGui::SliderInt("Widht", &i_widht, 1, 3840, "%.d");
+				static int i_height = 1024;
+				ImGui::SliderInt("Height", &i_height, 1, 2160, "%.d");
+
+				//ImGui::Text("Refresh rate: 60"); //TODO: preguntar al profe que es el refresh rate
+
+				if (ImGui::Checkbox("Fullscreen", &fullscreen))
+				{
+					App->window->SetFullscreen(fullscreen);
+					if (full_desktop) full_desktop = false;
+				}
+				ImGui::SameLine();
+				if (ImGui::Checkbox("Resiseable", &resiseable))
+				{
+					App->window->SetResiseable(resiseable);
+					if (full_desktop || fullscreen) full_desktop = false, fullscreen = false;
+				}
+				if (ImGui::Checkbox("Borderless", &borderless))
+					App->window->SetBorderless(borderless);
+				if (fullscreen || full_desktop) borderless = false;
+				ImGui::SameLine();
+				if (ImGui::Checkbox("Full Desktop", &full_desktop))
+				{
+					App->window->SetFullDesktop(full_desktop);
+					if (fullscreen) fullscreen = false;
+				}
+			}
 		}
 		if (ImGui::CollapsingHeader("File System"))
 		{
@@ -148,7 +192,6 @@ update_status ModuleEditor::PostUpdate(float dt)
 		if (ImGui::BeginMenu("File"))
 		{
 			if (ImGui::MenuItem("Quit", "esc")) return UPDATE_STOP;
-
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("View"))
@@ -177,6 +220,8 @@ update_status ModuleEditor::PostUpdate(float dt)
 		}
 		ImGui::EndMainMenuBar();
 	}
+
+	
 
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::Render();

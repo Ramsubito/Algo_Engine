@@ -19,6 +19,10 @@ public:
 	bool CleanUp();
 
 	void SetTitle(const char* title);
+	void SetFullscreen(bool fullscreen);
+	void SetResiseable(bool resiseable);
+	void SetBorderless(bool borderless);
+	void SetFullDesktop(bool full_desktop);
 
 public:
 	//The window we'll be rendering to
