@@ -18,6 +18,9 @@ public:
 	bool show_guidemo = false;
 	bool show_about = false;
 	bool window_is_active = true;
+	bool file_is_active = true;
+	bool input_is_active = true;
+	bool hardware_is_active = true;
 	bool fullscreen = false;
 	bool resiseable = false;
 	bool borderless = false;
@@ -25,8 +28,11 @@ public:
 	float f_brightness = 1.0f;
 	int i_width = 1280;
 	int i_height = 1024;
+	int mouse_x = 0, mouse_y = 0;
+	int mouse_motion_x = 0, mouse_motion_y = 0;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
+	SDL_Event mouse_wheel;
+	int mouse_wheel_input = 0;
 	bool Start();
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);

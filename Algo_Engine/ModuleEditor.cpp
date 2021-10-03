@@ -47,13 +47,30 @@ update_status ModuleEditor::Update(float dt)
 	}
 	SDL_SetWindowBrightness(App->window->window, f_brightness);
 
+	//Mouse position and motion
+	mouse_motion_x = mouse_x;
+	mouse_motion_y = mouse_y;
+	SDL_GetMouseState(&mouse_x, &mouse_y);
+	mouse_motion_x = mouse_x - mouse_motion_x;
+	mouse_motion_y = mouse_y - mouse_motion_y;
+
+	//Mouse wheel
+	mouse_wheel_input = 0;
+	while (SDL_PollEvent(&mouse_wheel))
+	{
+		if (mouse_wheel.type == SDL_MOUSEWHEEL)
+		{
+			if (mouse_wheel.wheel.y > 0) mouse_wheel_input = 1;
+			else if (mouse_wheel.wheel.y < 0) mouse_wheel_input = -1;
+		}
+	}
+
 	if (resiseable) SDL_SetWindowSize(App->window->window, i_width, i_height);
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleEditor::PostUpdate(float dt)
 {
-
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
@@ -93,10 +110,7 @@ update_status ModuleEditor::PostUpdate(float dt)
 			{
 				// TODO: poder cambiar el icono de la app abriendo la carpeta de proyecto desde otra ventana
 				ImGui::Text("Icon: ");
-				//ImGui::SameLine();
 
-
-				// TODO: Que al cambiar el slider se cambie el brillo widht y height del engine
 				ImGui::SliderFloat("Brightness", &f_brightness, 0.0f, 1.0f, "%.3f");
 				SDL_SetWindowBrightness(App->window->window, f_brightness);
 				ImGui::SliderInt("Width", &i_width, 1, 3840, "%.d");
@@ -128,15 +142,44 @@ update_status ModuleEditor::PostUpdate(float dt)
 		}
 		if (ImGui::CollapsingHeader("File System"))
 		{
-			ImGui::Text("f");
+			ImGui::Checkbox("Active", &file_is_active);
+			if (file_is_active)
+			{
+				ImGui::Text("Base Path:");
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), ".");
+				ImGui::Text("Read Paths:");
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), ".");
+				ImGui::Text("Write Path:");
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), ".");
+			}
 		}
 		if (ImGui::CollapsingHeader("Input"))
 		{
-			ImGui::Text("i");
+			ImGui::Checkbox("Active", &input_is_active);
+			if (input_is_active)
+			{
+				ImGui::Text("Mouse Position:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d, %d", mouse_x, mouse_y);
+
+				ImGui::Text("Mouse Motion:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d, %d", mouse_motion_x, mouse_motion_y);
+
+				ImGui::Text("Mouse Wheel:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", mouse_wheel_input);
+				ImGui::Separator();
+				ImGui::Text("TODO: poner los imputs de los botones del raton que se pulsan");
+			}
 		}
 		if (ImGui::CollapsingHeader("Hardware"))
 		{
-			ImGui::Text("h");
+			ImGui::Checkbox("Active", &hardware_is_active);
+			if (hardware_is_active)
+			{
+
+			}
 		}
 		ImGui::End();
 	}
@@ -179,10 +222,6 @@ update_status ModuleEditor::PostUpdate(float dt)
 			"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n"
 			"OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n"
 			"SOFTWARE.");
-
-
-		;
-
 
 		ImGui::End();
 	}
