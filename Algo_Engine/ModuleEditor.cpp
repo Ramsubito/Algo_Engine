@@ -47,24 +47,6 @@ update_status ModuleEditor::Update(float dt)
 	}
 	SDL_SetWindowBrightness(App->window->window, f_brightness);
 
-	//Mouse position and motion
-	mouse_motion_x = mouse_x;
-	mouse_motion_y = mouse_y;
-	SDL_GetMouseState(&mouse_x, &mouse_y);
-	mouse_motion_x = mouse_x - mouse_motion_x;
-	mouse_motion_y = mouse_y - mouse_motion_y;
-
-	//Mouse wheel
-	mouse_wheel_input = 0;
-	while (SDL_PollEvent(&mouse_wheel))
-	{
-		if (mouse_wheel.type == SDL_MOUSEWHEEL)
-		{
-			if (mouse_wheel.wheel.y > 0) mouse_wheel_input = 1;
-			else if (mouse_wheel.wheel.y < 0) mouse_wheel_input = -1;
-		}
-	}
-
 	if (resiseable) SDL_SetWindowSize(App->window->window, i_width, i_height);
 	return UPDATE_CONTINUE;
 }
@@ -146,7 +128,7 @@ update_status ModuleEditor::PostUpdate(float dt)
 			if (file_is_active)
 			{
 				ImGui::Text("Base Path:");
-				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), ".");
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", SDL_GetBasePath());
 				ImGui::Text("Read Paths:");
 				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), ".");
 				ImGui::Text("Write Path:");
@@ -160,15 +142,15 @@ update_status ModuleEditor::PostUpdate(float dt)
 			{
 				ImGui::Text("Mouse Position:");
 				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d, %d", mouse_x, mouse_y);
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d, %d", App->input->GetMouseX(), App->input->GetMouseY());
 
 				ImGui::Text("Mouse Motion:");
 				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d, %d", mouse_motion_x, mouse_motion_y);
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d, %d", App->input->GetMouseXMotion(), App->input->GetMouseYMotion());
 
 				ImGui::Text("Mouse Wheel:");
 				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", mouse_wheel_input);
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", App->input->GetMouseZ());
 				ImGui::Separator();
 				ImGui::Text("TODO: poner los imputs de los botones del raton que se pulsan");
 			}
