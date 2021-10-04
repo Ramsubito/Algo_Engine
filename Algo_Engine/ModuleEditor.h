@@ -5,7 +5,9 @@
 #include "imgui/backends/imgui_impl_sdl.h"
 #include "imgui/backends/imgui_impl_opengl3.h"
 #include "Glew/include/glew.h"
+#include "SDL/include/SDL_opengl.h"
 #include <gl/GL.h>
+#include <gl/GLU.h>
 
 class ModuleEditor : public Module
 {
@@ -30,6 +32,9 @@ public:
 	int i_height = 1024;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	bool Start();
+	SDL_version compiled;
+	char caps;
+
 	update_status Update(float dt);
 	update_status PostUpdate(float dt);
 	bool CleanUp();

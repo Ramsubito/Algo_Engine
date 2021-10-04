@@ -19,6 +19,8 @@ bool ModuleEditor::Start()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 
+	SDL_VERSION(&compiled);
+	
 	ImGui::StyleColorsDark();
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL3_Init();
@@ -160,7 +162,46 @@ update_status ModuleEditor::PostUpdate(float dt)
 			ImGui::Checkbox("Active", &hardware_is_active);
 			if (hardware_is_active)
 			{
-
+				ImGui::Text("SDL Version");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d.%d.%d", compiled.major, compiled.minor, compiled.patch);
+				ImGui::Separator();
+				ImGui::Text("CPUs:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d (%dkb)", SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
+				ImGui::Text("System Ram:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%dGb", SDL_GetSystemRAM()/1000);
+				ImGui::Text("Caps:");
+				ImGui::SameLine();
+				if (SDL_Has3DNow()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "3DNow");
+				ImGui::SameLine();
+				if (SDL_HasAltiVec()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "AltiVec");
+				ImGui::SameLine();
+				if (SDL_HasAVX()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "AVX");
+				ImGui::SameLine();
+				if (SDL_HasAVX2()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "AVX2"); 
+				ImGui::SameLine();
+				if (SDL_HasMMX()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "MMX");
+				ImGui::SameLine();
+				if (SDL_HasRDTSC()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "AltiRDTSC");
+				ImGui::SameLine();
+				if (SDL_HasSSE()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "SSE");
+				ImGui::SameLine();
+				if (SDL_HasSSE2()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "SSE2");
+				ImGui::SameLine();
+				if (SDL_HasSSE3()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "SSE3");
+				ImGui::SameLine();
+				if (SDL_HasSSE41()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "SSE41");
+				ImGui::SameLine();
+				if (SDL_HasSSE42()) ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "SSE42");
+				ImGui::Separator();
+				ImGui::Text("GPU:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s");
+				ImGui::Text("Brand:");
+				ImGui::SameLine();	
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d");
 			}
 		}
 		ImGui::End();
