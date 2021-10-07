@@ -19,6 +19,11 @@ public:
 	bool show_configuration = false;
 	bool show_guidemo = false;
 	bool show_about = false;
+	bool depth_test = true;
+	bool cull_face = true;
+	bool lighting = true;
+	bool color_material = true;
+	bool texture_2d = true;
 	bool window_is_active = true;
 	bool file_is_active = true;
 	bool input_is_active = true;

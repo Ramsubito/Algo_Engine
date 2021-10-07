@@ -261,6 +261,40 @@ update_status ModuleEditor::PostUpdate(float dt)
 			if (ImGui::MenuItem("Quit", "esc")) return UPDATE_STOP;
 			ImGui::EndMenu();
 		}
+		if (ImGui::BeginMenu("Render"))
+		{
+			if (ImGui::MenuItem("Depth Test", "", depth_test))
+			{
+				depth_test = !depth_test;
+				if (depth_test) glEnable(GL_DEPTH_TEST);
+				else glDisable(GL_DEPTH_TEST);
+			}
+			if (ImGui::MenuItem("Cull Face", "", cull_face))
+			{
+				cull_face = !cull_face;
+				if (cull_face) glEnable(GL_CULL_FACE);
+				else glDisable(GL_CULL_FACE);
+			}
+			if (ImGui::MenuItem("Lighting", "", lighting))
+			{
+				lighting = !lighting;
+				if (lighting) glEnable(GL_LIGHTING);
+				else glDisable(GL_LIGHTING);
+			}
+			if (ImGui::MenuItem("Color Material", "", color_material))
+			{
+				color_material = !color_material;
+				if (color_material) glEnable(GL_COLOR_MATERIAL);
+				else glDisable(GL_COLOR_MATERIAL);
+			}
+			if (ImGui::MenuItem("Textures", "", texture_2d))
+			{
+				texture_2d = !texture_2d;
+				if (depth_test) glEnable(GL_TEXTURE_2D);
+				else glDisable(GL_TEXTURE_2D);
+			}
+			ImGui::EndMenu();
+		}
 		if (ImGui::BeginMenu("View"))
 		{
 			if (ImGui::MenuItem("Console", "1", show_console))
