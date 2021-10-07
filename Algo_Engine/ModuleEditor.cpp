@@ -25,6 +25,11 @@ bool ModuleEditor::Start()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL3_Init();
 
+	LOG("Vendor: %s", glGetString(GL_VENDOR));
+	LOG("Renderer: %s", glGetString(GL_RENDERER));
+	LOG("OpenGL version supported %s", glGetString(GL_VERSION));
+	LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+
 	return ret;
 }
 
@@ -198,10 +203,10 @@ update_status ModuleEditor::PostUpdate(float dt)
 				ImGui::Separator();
 				ImGui::Text("GPU:");
 				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s");
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", glGetString(GL_RENDERER));
 				ImGui::Text("Brand:");
 				ImGui::SameLine();	
-				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d");
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", glGetString(GL_VENDOR));
 			}
 		}
 		ImGui::End();
