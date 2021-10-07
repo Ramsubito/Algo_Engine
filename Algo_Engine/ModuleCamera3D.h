@@ -26,4 +26,5 @@ private:
 	void CalculateViewMatrix();
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;
+
 };

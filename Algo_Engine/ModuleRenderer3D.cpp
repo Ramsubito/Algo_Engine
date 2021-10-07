@@ -128,8 +128,75 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
 {
+	glCube(0, 0, 0, 1);
+
+	glCube(2, 0, 2, 5);
+	
 	SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
+}
+
+void ModuleRenderer3D::glCube(float x, float y, float z, float size)
+{
+	glBegin(GL_TRIANGLES);
+
+	// front face =================
+	glVertex3f(x + size, y + size, z + size);    // v0-v1-v2
+	glVertex3f(x, y + size, z + size);
+	glVertex3f(x, y, z + size);
+
+	glVertex3f(x, y, z + size);    // v2-v3-v0
+	glVertex3f(x + size, y, z + size);
+	glVertex3f(x + size, y + size, z + size);
+
+	// right face =================
+	glVertex3f(x + size, y + size, z + size);    // v0-v3-v4
+	glVertex3f(x + size, y, z + size);
+	glVertex3f(x + size, y, z);
+
+	glVertex3f(x + size, y, z);    // v4-v5-v0
+	glVertex3f(x + size, y + size, z);
+	glVertex3f(x + size, y + size, z + size);
+
+	// top face ===================
+	glVertex3f(x + size, y + size, z + size);    // v0-v5-v6
+	glVertex3f(x + size, y + size, z);
+	glVertex3f(x, y + size, z);
+
+	glVertex3f(x, y + size, z);    // v6-v1-v0
+	glVertex3f(x, y + size, z + size);
+	glVertex3f(x + size, y + size, z + size);
+
+	//left face ===================
+	glVertex3f(x, y + size, z + size);    // v1-v6-v7
+	glVertex3f(x, y + size, z);
+	glVertex3f(x, y, z);
+
+	glVertex3f(x, y, z);    // v7-v2-v1
+	glVertex3f(x, y, z + size);
+	glVertex3f(x, y + size, z + size);
+
+	//bottom face ===================
+	glVertex3f(x, y, z);    // v7-v2-v3
+	glVertex3f(x + size, y, z);
+	glVertex3f(x + size, y, z + size);
+
+	glVertex3f(x + size, y, z + size);    // v3-v4-v7
+	glVertex3f(x, y, z + size);
+	glVertex3f(x, y, z);
+
+	//back face ===================
+	glVertex3f(x, y, z);    // v7-v4-v5
+	glVertex3f(x, y + size, z);
+	glVertex3f(x + size, y + size, z);
+
+	glVertex3f(x + size, y + size, z);    // v5-v6-v7
+	glVertex3f(x + size, y, z);
+	glVertex3f(x, y, z);
+
+	glRotatef(0.1f, 1.0f, 1.0f, 0.0f);
+
+	glEnd();
 }
 
 // Called before quitting

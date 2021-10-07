@@ -15,11 +15,10 @@ public:
 	bool Init();
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
+	void glCube(float x, float y, float z, float size);
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-
-public:
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext context;
