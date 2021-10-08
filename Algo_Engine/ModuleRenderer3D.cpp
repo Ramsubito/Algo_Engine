@@ -127,16 +127,12 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 // PostUpdate present buffer to screen
 update_status ModuleRenderer3D::PostUpdate(float dt)
-{
-	glCube(0, 0, 0, 1);
-
-	glCube(2, 0, 2, 5);
-	
+{	
 	SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
 }
 
-void ModuleRenderer3D::glCube(float x, float y, float z, float size)
+void ModuleRenderer3D::CubeDirectMode(float x, float y, float z, float size)
 {
 	glBegin(GL_TRIANGLES);
 
