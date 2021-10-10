@@ -103,7 +103,9 @@ update_status ModuleEditor::PostUpdate(float dt)
 				ImGui::SliderFloat("Brightness", &f_brightness, 0.0f, 1.0f, "%.3f");
 				SDL_SetWindowBrightness(App->window->window, f_brightness);
 				ImGui::SliderInt("Width", &i_width, 1, 3840, "%.d");
+				SDL_SetWindowSize(App->window->window, i_width, i_height);
 				ImGui::SliderInt("Height", &i_height, 1, 2160, "%.d");
+				SDL_SetWindowSize(App->window->window, i_width, i_height);
 
 				//ImGui::Text("Refresh rate: 60"); //TODO: preguntar al profe que es el refresh rate
 

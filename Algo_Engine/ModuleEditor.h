@@ -32,6 +32,10 @@ public:
 	bool resiseable = false;
 	bool borderless = false;
 	bool full_desktop = false;
+	int width = 1280;
+	int height = 1024;
+	int max_width = 1500;
+	int max_height = 1500;
 	float f_brightness = 1.0f;
 	int i_width = 1280;
 	int i_height = 1024;
