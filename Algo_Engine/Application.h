@@ -9,7 +9,10 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleEditor.h"
+
 #include <vector>
+#include <list>
+#include <stdio.h>
 
 class Application
 {
@@ -27,6 +30,8 @@ private:
 	float	dt;
 	std::vector<Module*> list_modules;
 
+	int AsignVec = 0;
+
 public:
 
 	Application();
@@ -35,6 +40,11 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
+
+
+	std::vector<float> fpsLog;
+	std::vector<float> msLog;
+	int maxFPS = 60;
 
 private:
 

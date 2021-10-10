@@ -90,7 +90,15 @@ update_status ModuleEditor::PostUpdate(float dt)
 		}
 		if (ImGui::CollapsingHeader("Application"))
 		{
-			ImGui::Text("app");
+			//Show FPS
+			ImGui::SliderInt("Max FPS", &App->maxFPS, 1, 60);
+
+			char title[25];
+			sprintf_s(title, 25, "FPS %.1f", App->fpsLog[App->fpsLog.size() - 1]);
+			ImGui::PlotHistogram("##FPS", &App->fpsLog[0], App->fpsLog.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
+
+			sprintf_s(title, 25, "ms %.1f", App->msLog[App->msLog.size() - 1]);
+			ImGui::PlotHistogram("##MILISECONDS", &App->msLog[0], App->msLog.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
 		}
 		if (ImGui::CollapsingHeader("Window"))
 		{
