@@ -26,5 +26,8 @@ private:
 	void CalculateViewMatrix();
 
 	mat4x4 ViewMatrix, ViewMatrixInverse;
+public:
+	float drag_speed;
+	float zoom_speed;
 
 };

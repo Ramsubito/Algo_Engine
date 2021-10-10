@@ -22,7 +22,8 @@ bool ModuleCamera3D::Start()
 {
 	LOG("Setting up the camera");
 	bool ret = true;
-
+	drag_speed = 0.5f;
+	zoom_speed = 20;
 	return ret;
 }
 
@@ -39,7 +40,6 @@ update_status ModuleCamera3D::Update(float dt)
 {
 	// Implement a debug camera with keys and mouse
 	// Now we can make this movememnt frame rate independant!
-
 	vec3 newPos(0,0,0);
 	float speed = 3.0f * dt;
 	if(App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
@@ -54,6 +54,23 @@ update_status ModuleCamera3D::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) newPos -= X * speed;
 	if(App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) newPos += X * speed;
+	
+	//Drag middle mouse button
+	
+	if ((App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_REPEAT))
+	{
+		newPos -= X * App->input->GetMouseXMotion() * drag_speed * speed;
+		newPos += Y * App->input->GetMouseYMotion() * drag_speed * speed;
+	}
+	
+
+	//-----
+	//ZOOM
+	if (App->input->GetMouseZ() > 0)
+		newPos -= Z * zoom_speed * speed;
+	else if (App->input->GetMouseZ() < 0)
+		newPos += Z * zoom_speed * speed;
+
 
 	Position += newPos;
 	Reference += newPos;
