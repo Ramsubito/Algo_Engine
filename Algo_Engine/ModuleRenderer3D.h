@@ -15,9 +15,6 @@ public:
 	bool Init();
 	update_status PreUpdate(float dt);
 	update_status PostUpdate(float dt);
-	void CubeDirectMode(float x, float y, float z, float size);
-	void CubeVertexArrays(float x, float y, float z, float size);
-	void CubeVertexArraysWithIndices(float x, float y, float z, float size);
 	bool CleanUp();
 
 	void OnResize(int width, int height);

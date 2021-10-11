@@ -42,6 +42,8 @@ class Cube : public Primitive
 public :
 	Cube();
 	Cube(float sizeX, float sizeY, float sizeZ);
+	void CubeDirectModeRender(float x, float y, float z, float size);
+	void CubeVertexArraysRender(float x, float y, float z, float size);
 	void InnerRender() const;
 public:
 	vec3 size;

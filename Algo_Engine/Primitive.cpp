@@ -116,46 +116,175 @@ void Cube::InnerRender() const
 	float sy = size.y * 0.5f;
 	float sz = size.z * 0.5f;
 
-	glBegin(GL_QUADS);
+	GLfloat vertices2[] =
+	{
+		-sx, -sy, sz,	sx, -sy, sz,	sx,  sy, sz,	-sx, sy, sz,   // v0,v1,v2,v3 (front)
+		sx, -sy, -sz,	-sx, -sy, -sz,  -sx,  sy, -sz,	sx,  sy, -sz,   // v0,v3,v4,v5 (right)
+		sx, -sy,  sz,   sx, -sy, -sz,	sx,  sy, -sz,	sx,  sy,  sz,   // v0,v5,v6,v1 (top)
+		-sx, -sy, -sz,  -sx, -sy,  sz,  -sx,  sy,  sz,  -sx,  sy, -sz,   // v1,v6,v7,v2 (left)
+		-sx, sy,  sz,   sx, sy,  sz,    sx, sy, -sz,	-sx, sy, -sz,   // v7,v4,v3,v2 (bottom)
+		-sx, -sy, -sz,  sx, -sy, -sz,   sx, -sy,  sz,   -sx, -sy,  sz,	// v4,v7,v6,v5 (back)
+	}; 
 
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-sx, -sy, sz);
-	glVertex3f( sx, -sy, sz);
-	glVertex3f( sx,  sy, sz);
-	glVertex3f(-sx,  sy, sz);
+	GLubyte indices[] =
+	{
+		0, 1, 2,   2, 3, 0,      // front
+		4, 5, 6,   6, 7, 4,      // right
+		8, 9,10,  10,11, 8,      // top
+		12,13,14,  14,15,12,     // left
+		16,17,18,  18,19,16,     // bottom
+		20,21,22,  22,23,20		 // back
+	};
 
-	glNormal3f(0.0f, 0.0f, -1.0f);
-	glVertex3f( sx, -sy, -sz);
-	glVertex3f(-sx, -sy, -sz);
-	glVertex3f(-sx,  sy, -sz);
-	glVertex3f( sx,  sy, -sz);
 
-	glNormal3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(sx, -sy,  sz);
-	glVertex3f(sx, -sy, -sz);
-	glVertex3f(sx,  sy, -sz);
-	glVertex3f(sx,  sy,  sz);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, vertices2);
 
-	glNormal3f(-1.0f, 0.0f, 0.0f);
-	glVertex3f(-sx, -sy, -sz);
-	glVertex3f(-sx, -sy,  sz);
-	glVertex3f(-sx,  sy,  sz);
-	glVertex3f(-sx,  sy, -sz);
+	glPushMatrix();
 
-	glNormal3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-sx, sy,  sz);
-	glVertex3f( sx, sy,  sz);
-	glVertex3f( sx, sy, -sz);
-	glVertex3f(-sx, sy, -sz);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, indices);
 
-	glNormal3f(0.0f, -1.0f, 0.0f);
-	glVertex3f(-sx, -sy, -sz);
-	glVertex3f( sx, -sy, -sz);
-	glVertex3f( sx, -sy,  sz);
-	glVertex3f(-sx, -sy,  sz);
+	glPopMatrix();
+
+	glDisableClientState(GL_VERTEX_ARRAY);  // disable vertex arrays
+}
+
+
+void Cube::CubeDirectModeRender(float x, float y, float z, float size)
+{
+	glBegin(GL_TRIANGLES);
+
+	// front face =================
+	glVertex3f(x + size, y + size, z + size);    // v0-v1-v2
+	glVertex3f(x, y + size, z + size);
+	glVertex3f(x, y, z + size);
+
+	glVertex3f(x, y, z + size);    // v2-v3-v0
+	glVertex3f(x + size, y, z + size);
+	glVertex3f(x + size, y + size, z + size);
+
+	// right face =================
+	glVertex3f(x + size, y + size, z + size);    // v0-v3-v4
+	glVertex3f(x + size, y, z + size);
+	glVertex3f(x + size, y, z);
+
+	glVertex3f(x + size, y, z);    // v4-v5-v0
+	glVertex3f(x + size, y + size, z);
+	glVertex3f(x + size, y + size, z + size);
+
+	// top face ===================
+	glVertex3f(x + size, y + size, z + size);    // v0-v5-v6
+	glVertex3f(x + size, y + size, z);
+	glVertex3f(x, y + size, z);
+
+	glVertex3f(x, y + size, z);    // v6-v1-v0
+	glVertex3f(x, y + size, z + size);
+	glVertex3f(x + size, y + size, z + size);
+
+	//left face ===================
+	glVertex3f(x, y + size, z + size);    // v1-v6-v7
+	glVertex3f(x, y + size, z);
+	glVertex3f(x, y, z);
+
+	glVertex3f(x, y, z);    // v7-v2-v1
+	glVertex3f(x, y, z + size);
+	glVertex3f(x, y + size, z + size);
+
+	//bottom face ===================
+	glVertex3f(x, y, z);    // v7-v2-v3
+	glVertex3f(x + size, y, z);
+	glVertex3f(x + size, y, z + size);
+
+	glVertex3f(x + size, y, z + size);    // v3-v4-v7
+	glVertex3f(x, y, z + size);
+	glVertex3f(x, y, z);
+
+	//back face ===================
+	glVertex3f(x, y, z);    // v7-v4-v5
+	glVertex3f(x, y + size, z);
+	glVertex3f(x + size, y + size, z);
+
+	glVertex3f(x + size, y + size, z);    // v5-v6-v7
+	glVertex3f(x + size, y, z);
+	glVertex3f(x, y, z);
+
+	glRotatef(0.1f, 1.0f, 1.0f, 0.0f);
 
 	glEnd();
 }
+
+
+void Cube::CubeVertexArraysRender(float x, float y, float z, float size)
+{
+	float cubeVectors[] =
+	{
+	x + size, y + size, z + size,   // v0-v1-v2
+	x, y + size, z + size,
+	x, y, z + size,
+
+	x, y, z + size,  // v2-v3-v0
+	x + size, y, z + size,
+	x + size, y + size, z + size,
+
+	// right face =================
+	x + size, y + size, z + size,    // v0-v3-v4
+	x + size, y, z + size,
+	x + size, y, z,
+
+	x + size, y, z,    // v4-v5-v0
+	x + size, y + size, z,
+	x + size, y + size, z + size,
+
+	// top face ===================
+	x + size, y + size, z + size,   // v0-v5-v6
+	x + size, y + size, z,
+	x, y + size, z,
+
+	x, y + size, z,    // v6-v1-v0
+	x, y + size, z + size,
+	x + size, y + size, z + size,
+
+	//left face ===================
+	x, y + size, z + size,    // v1-v6-v7
+	x, y + size, z,
+	x, y, z,
+
+	x, y, z,    // v7-v2-v1
+	x, y, z + size,
+	x, y + size, z + size,
+
+	//bottom face ===================
+	x, y, z,   // v7-v2-v3
+	x + size, y, z,
+	x + size, y, z + size,
+
+	x + size, y, z + size,    // v3-v4-v7
+	x, y, z + size,
+	x, y, z,
+
+	//back face ===================
+	x, y, z,    // v7-v4-v5
+	x, y + size, z,
+	x + size, y + size, z,
+
+	x + size, y + size, z,    // v5-v6-v7
+	x + size, y, z,
+	x, y, z
+	};
+
+	uint my_id = 0;
+	glGenBuffers(1, (GLuint*) & (my_id));
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 36 * 3, cubeVectors, GL_STATIC_DRAW);
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	// … bind and use other buffers
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
 
 // SPHERE ============================================
 Sphere::Sphere() : Primitive(), radius(1.0f)
