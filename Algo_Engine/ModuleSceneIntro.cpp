@@ -37,9 +37,11 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 
-	App->renderer3D->CubeDirectMode(0, 0, 0, 1);
-
 	App->renderer3D->CubeDirectMode(2, 0, 2, 5);
+
+	App->renderer3D->CubeVertexArrays(0, 0, 0, 1);
+
+	App->renderer3D->CubeVertexArrays(-2, 3, -2, 3);
 
 	return UPDATE_CONTINUE;
 }

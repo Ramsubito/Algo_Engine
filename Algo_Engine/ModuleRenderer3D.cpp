@@ -195,6 +195,155 @@ void ModuleRenderer3D::CubeDirectMode(float x, float y, float z, float size)
 	glEnd();
 }
 
+void ModuleRenderer3D::CubeVertexArrays(float x, float y, float z, float size)
+{
+	float cubeVectors[] = 
+	{
+	x + size, y + size, z + size,   // v0-v1-v2
+	x, y + size, z + size,
+	x, y, z + size,
+
+	x, y, z + size,  // v2-v3-v0
+	x + size, y, z + size,
+	x + size, y + size, z + size,
+
+	// right face =================
+	x + size, y + size, z + size,    // v0-v3-v4
+	x + size, y, z + size,
+	x + size, y, z,
+
+	x + size, y, z,    // v4-v5-v0
+	x + size, y + size, z,
+	x + size, y + size, z + size,
+
+	// top face ===================
+	x + size, y + size, z + size,   // v0-v5-v6
+	x + size, y + size, z,
+	x, y + size, z,
+
+	x, y + size, z,    // v6-v1-v0
+	x, y + size, z + size,
+	x + size, y + size, z + size,
+
+	//left face ===================
+	x, y + size, z + size,    // v1-v6-v7
+	x, y + size, z,
+	x, y, z,
+
+	x, y, z,    // v7-v2-v1
+	x, y, z + size,
+	x, y + size, z + size,
+
+	//bottom face ===================
+	x, y, z,   // v7-v2-v3
+	x + size, y, z,
+	x + size, y, z + size,
+
+	x + size, y, z + size,    // v3-v4-v7
+	x, y, z + size,
+	x, y, z,
+
+	//back face ===================
+	x, y, z,    // v7-v4-v5
+	x, y + size, z,
+	x + size, y + size, z,
+
+	x + size, y + size, z,    // v5-v6-v7
+	x + size, y, z,
+	x, y, z
+	};
+
+	uint my_id = 0;
+	glGenBuffers(1, (GLuint*)&(my_id));
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 36 * 3, cubeVectors, GL_STATIC_DRAW);
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	glVertexPointer(3, GL_FLOAT, 0, NULL);
+	// … bind and use other buffers
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+void ModuleRenderer3D::CubeVertexArraysWithIndices(float x, float y, float z, float size)
+{
+	float cubeVectors[] =
+	{
+	x + size, y + size, z + size,   // v0-v1-v2
+	x, y + size, z + size,
+	x, y, z + size,
+
+	x, y, z + size,  // v2-v3-v0
+	x + size, y, z + size,
+	x + size, y + size, z + size,
+
+	// right face =================
+	x + size, y + size, z + size,    // v0-v3-v4
+	x + size, y, z + size,
+	x + size, y, z,
+
+	x + size, y, z,    // v4-v5-v0
+	x + size, y + size, z,
+	x + size, y + size, z + size,
+
+	// top face ===================
+	x + size, y + size, z + size,   // v0-v5-v6
+	x + size, y + size, z,
+	x, y + size, z,
+
+	x, y + size, z,    // v6-v1-v0
+	x, y + size, z + size,
+	x + size, y + size, z + size,
+
+	//left face ===================
+	x, y + size, z + size,    // v1-v6-v7
+	x, y + size, z,
+	x, y, z,
+
+	x, y, z,    // v7-v2-v1
+	x, y, z + size,
+	x, y + size, z + size,
+
+	//bottom face ===================
+	x, y, z,   // v7-v2-v3
+	x + size, y, z,
+	x + size, y, z + size,
+
+	x + size, y, z + size,    // v3-v4-v7
+	x, y, z + size,
+	x, y, z,
+
+	//back face ===================
+	x, y, z,    // v7-v4-v5
+	x, y + size, z,
+	x + size, y + size, z,
+
+	x + size, y + size, z,    // v5-v6-v7
+	x + size, y, z,
+	x, y, z
+	};
+
+	int cubeIndices[] =
+	{
+		0,1,2
+	};
+
+	uint my_id = 0;
+	glGenBuffers(1, (GLuint*)&(my_id));
+	glBindBuffer(GL_ARRAY_BUFFER, my_id);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 36 * 3, cubeVectors, GL_STATIC_DRAW);
+
+	uint my_indices = 0;
+	glGenBuffers(1, (GLuint*)&(my_indices));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * 8, cubeVectors, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, my_indices);
+	glDrawElements(GL_TRIANGLES, 8, GL_UNSIGNED_INT, NULL);
+}
+
+
 // Called before quitting
 bool ModuleRenderer3D::CleanUp()
 {
