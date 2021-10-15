@@ -54,6 +54,8 @@ public:
 	std::list<float> ms_arr;
 
 private:
+	char mouseButton[30];
+	
 
 
 };

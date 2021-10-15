@@ -1,6 +1,8 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleEditor.h"
+#include <stdio.h>
+
 
 ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -152,11 +154,14 @@ update_status ModuleEditor::PostUpdate(float dt)
 				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), ".");
 			}
 		}
+		//------------Input detection
 		if (ImGui::CollapsingHeader("Input"))
 		{
 			ImGui::Checkbox("Active", &input_is_active);
 			if (input_is_active)
 			{
+				int mouse_button = 0;
+				
 				ImGui::Text("Mouse Position:");
 				ImGui::SameLine();
 				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d, %d", App->input->GetMouseX(), App->input->GetMouseY());
@@ -169,9 +174,27 @@ update_status ModuleEditor::PostUpdate(float dt)
 				ImGui::SameLine();
 				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%d", App->input->GetMouseZ());
 				ImGui::Separator();
-				ImGui::Text("TODO: poner los imputs de los botones del raton que se pulsan");
+				ImGui::Text("Mouse Button pressed:");
+				ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s",mouseButton);
+				ImGui::Separator();
+				
+				if (App->input->GetMouseButton(SDL_BUTTON_RIGHT) == KEY_DOWN) 
+				{
+					strcpy(mouseButton, "Right button");
+				}
+				if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+				{
+					strcpy(mouseButton, "Left button");
+				}
+				if (App->input->GetMouseButton(SDL_BUTTON_MIDDLE) == KEY_DOWN)
+				{
+					strcpy(mouseButton, "Middle button");
+				}
+				
+				
 			}
 		}
+		//--------------Hardware
 		if (ImGui::CollapsingHeader("Hardware"))
 		{
 			ImGui::Checkbox("Active", &hardware_is_active);
@@ -305,6 +328,7 @@ update_status ModuleEditor::PostUpdate(float dt)
 			}
 			if (ImGui::MenuItem("Wirefrane", "", wireframe))
 			{
+				//wireframe todo
 				wireframe = !wireframe;
 			}
 			ImGui::EndMenu();
