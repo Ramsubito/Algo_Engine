@@ -303,6 +303,10 @@ update_status ModuleEditor::PostUpdate(float dt)
 				if (depth_test) glEnable(GL_TEXTURE_2D);
 				else glDisable(GL_TEXTURE_2D);
 			}
+			if (ImGui::MenuItem("Wirefrane", "", wireframe))
+			{
+				wireframe = !wireframe;
+			}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("View"))

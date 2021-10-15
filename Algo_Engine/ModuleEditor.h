@@ -16,6 +16,7 @@ public:
 	ModuleEditor(Application* app, bool start_enabled = true);
 	~ModuleEditor();
 
+	bool wireframe = false;
 	bool show_console = false;
 	bool show_configuration = false;
 	bool show_guidemo = false;
