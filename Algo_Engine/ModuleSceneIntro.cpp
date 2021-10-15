@@ -46,12 +46,14 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 
+	//-----Start cube
+	//Cube c1(1, 1, 1);
+	//c1.InnerRender();
 
-	Cube c1(1, 1, 1);
-	c1.InnerRender();
-
-	c1.CubeDirectModeRender(-2, -2, -2, 1);
+	//c1.CubeDirectModeRender(-2, -2, -2, 1);
 	//c1.CubeVertexArraysRender(2, 2, 2, 1); //Por alguna razon no se ve el innerRender si pongo este
+
+
 
 	return UPDATE_CONTINUE;
 }
