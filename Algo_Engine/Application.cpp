@@ -76,27 +76,13 @@ void Application::PrepareUpdate()
 {
 	float ms = (float)ms_timer.Read();
 	ms_timer.Start();
-	
-if (msLog[59] != 0.0f)
-	{
-		std::rotate(msLog.begin(), msLog.begin() + 1, msLog.end());
-		std::rotate(fpsLog.begin(), fpsLog.begin() + 1, fpsLog.end());
-	}
-	msLog.at(AsignVec) = ms;
-	fpsLog.at(AsignVec) = (int)(1000.0f / ms);
-	if (AsignVec < 59) AsignVec++;
-	//dt
-	dt = ms / 1000.0f;
 }
 
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
-	float ms_max = (1000.0f / maxFPS);
-	float ms_now = ms_timer.Read();
-
-	if (ms_now < ms_max)
-		SDL_Delay((Uint32)(ms_max - ms_now)); // Delay to cap framerate
+	last_FPS = 1.0f / dt;
+	last_ms = (float)ms_timer.Read();
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
@@ -151,4 +137,14 @@ bool Application::CleanUp()
 void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);
+}
+
+float Application::GetMS()
+{
+	return last_ms;
+}
+
+float Application::GetFPS()
+{
+	return last_FPS;
 }

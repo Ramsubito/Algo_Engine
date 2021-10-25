@@ -9,6 +9,7 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include <list>
+#include <vector>
 
 class ModuleEditor : public Module
 {
@@ -50,8 +51,8 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	std::list<float> fr_arr;
-	std::list<float> ms_arr;
+	std::vector<float> vector_ms;
+	std::vector<float> vector_fps;
 
 private:
 	char mouseButton[30];

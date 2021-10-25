@@ -93,14 +93,32 @@ update_status ModuleEditor::PostUpdate(float dt)
 		if (ImGui::CollapsingHeader("Application"))
 		{
 			//Show FPS
+			ImGui::Text("Engine Name: %s", TITLE);
+
+			static char organization[9] = "UPC CITM";
+			ImGui::Text("Organization: %s", organization);
+
+			if (vector_fps.size() != 100)
+			{
+				vector_fps.push_back(App->GetFPS());
+				vector_ms.push_back(App->GetMS());
+			}
+			else
+			{
+				vector_fps.erase(vector_fps.begin());
+				vector_fps.push_back(App->GetFPS());
+
+				vector_ms.erase(vector_ms.begin());
+				vector_ms.push_back(App->GetMS());
+			}
+
+
+			int zero = 0;
 			ImGui::SliderInt("Max FPS", &App->maxFPS, 1, 60);
-
-			char title[25];
-			sprintf_s(title, 25, "FPS %.1f", App->fpsLog[App->fpsLog.size() - 1]);
-			ImGui::PlotHistogram("##FPS", &App->fpsLog[0], App->fpsLog.size(), 0, title, 0.0f, 100.0f, ImVec2(310, 100));
-
-			sprintf_s(title, 25, "ms %.1f", App->msLog[App->msLog.size() - 1]);
-			ImGui::PlotHistogram("##MILISECONDS", &App->msLog[0], App->msLog.size(), 0, title, 0.0f, 40.0f, ImVec2(310, 100));
+			ImGui::Text("Framerate %.1f", vector_fps[vector_fps.size() - 1]);
+			ImGui::PlotHistogram("##framerate", &vector_fps[0], vector_fps.size(), 0, NULL, 0.0f, 100.0f, ImVec2(310, 100));
+			ImGui::Text("Milliseconds %.1f", vector_ms[vector_ms.size() - 1]);
+			ImGui::PlotHistogram("##milliseconds", &vector_ms[0], vector_ms.size(), 0, NULL, 0.0f, 40.0f, ImVec2(310, 100));
 		}
 		if (ImGui::CollapsingHeader("Window"))
 		{

@@ -27,7 +27,9 @@ public:
 private:
 
 	Timer	ms_timer;
-	float	dt;
+	float	dt = 0;
+	float last_FPS = 0.0f;
+	float last_ms = 0.0f;
 	std::vector<Module*> list_modules;
 
 	int AsignVec = 0;
@@ -41,6 +43,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	float GetMS();
+	float GetFPS();
 
 	std::vector<float> fpsLog;
 	std::vector<float> msLog;
