@@ -74,7 +74,7 @@ bool Application::Init()
 // ---------------------------------------------
 void Application::PrepareUpdate()
 {
-	float ms = (float)ms_timer.Read();
+	dt = (float)ms_timer.Read() / 1000.0f;
 	ms_timer.Start();
 }
 
@@ -83,6 +83,12 @@ void Application::FinishUpdate()
 {
 	last_FPS = 1.0f / dt;
 	last_ms = (float)ms_timer.Read();
+
+	float maxMsFrame = (1000.0f / maxFPS); // Read 
+	float MS_now = ms_timer.Read();
+
+	if (MS_now < maxMsFrame)
+		SDL_Delay((Uint32)(maxMsFrame - MS_now)); // Cap framerate
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
